@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>8013.baby - 伴你一生 · 岁月长情</title>
+    <style>
+        :root {
+            /* Palette: Eternal Gold, Warm Sand, Deep Earth */
+            --eternal-gold: #C5A059;
+            --warm-sand: #F5DEB3;
+            --deep-earth: #5D4037;
+            --soft-white: #FAF9F6;
+            --bg-gradient: linear-gradient(to bottom, #fffbf0 0%, #fff 100%);
+            --text-main: #3E2723;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background: var(--bg-gradient);
+            color: var(--text-main);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* --- Header Section --- */
+        header {
+            text-align: center;
+            padding: 4rem 1rem 2rem;
+            position: relative;
+        }
+
+        .domain-title {
+            font-size: clamp(3rem, 10vw, 7rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 0.5rem;
+            cursor: default;
+        }
+
+        /* Effect 1: 8013 - Golden Time Flow (Endurance) */
+        .num-part {
+            display: inline-block;
+            background: linear-gradient(90deg, #8E6E34, #C5A059, #F5DEB3, #8E6E34);
+            background-size: 300% 100%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: goldFlow 4s linear infinite;
+            filter: drop-shadow(0 2px 4px rgba(142, 110, 52, 0.3));
+        }
+
+        /* Effect 2: .baby - Gentle Lean/Embrace (Comfort) */
+        .tld-part {
+            display: inline-block;
+            color: #E6A288; /* Soft Terracotta */
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            animation: gentleLean 3s ease-in-out infinite;
+            transform-origin: left bottom;
+        }
+
+        @keyframes goldFlow {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        @keyframes gentleLean {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(-5deg) translateY(2px); } /* Leaning in towards the numbers */
+        }
+
+        .tagline {
+            font-size: 1.6rem;
+            color: var(--deep-earth);
+            font-weight: 300;
+            margin-top: 15px;
+            letter-spacing: 5px;
+        }
+
+        .sub-tagline {
+            font-size: 1rem;
+            color: #8D6E63;
+            margin-top: 8px;
+        }
+
+        /* --- Canvas Visualization --- */
+        #visual-wrapper {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            background: radial-gradient(circle at center, #ffffff 0%, #fdf5e6 100%);
+            overflow: hidden;
+            margin-bottom: 3rem;
+            border-top: 1px solid rgba(197, 160, 89, 0.2);
+            border-bottom: 1px solid rgba(197, 160, 89, 0.2);
+        }
+
+        canvas {
+            display: block;
+        }
+
+        .visual-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.2rem;
+            color: rgba(197, 160, 89, 0.15);
+            font-weight: bold;
+            letter-spacing: 8px;
+            pointer-events: none;
+            white-space: nowrap;
+            text-transform: uppercase;
+        }
+
+        /* --- 8 Fields Grid --- */
+        .features-section {
+            padding: 2rem 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-header h2 {
+            font-size: 2rem;
+            color: var(--deep-earth);
+        }
+        
+        .section-header h2 span {
+            color: var(--eternal-gold);
+            border-bottom: 2px solid var(--warm-sand);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(93, 64, 55, 0.05);
+            transition: all 0.3s ease;
+            border: 1px solid #fcfcfc;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(197, 160, 89, 0.15);
+            border-color: var(--warm-sand);
+        }
+
+        .icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .card h3 {
+            font-size: 1.25rem;
+            color: var(--deep-earth);
+            margin-bottom: 0.8rem;
+        }
+
+        .card p {
+            font-size: 0.95rem;
+            color: #795548;
+            line-height: 1.6;
+        }
+
+        /* --- CTA Section --- */
+        .cta-container {
+            text-align: center;
+            padding: 6rem 1rem;
+            background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(197,160,89,0.1) 100%);
+        }
+
+        .price-display {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--eternal-gold);
+            margin-bottom: 2rem;
+        }
+
+        .price-display span {
+            font-size: 1.5rem;
+            color: #a1887f;
+            font-weight: 400;
+        }
+
+        .buy-btn {
+            display: inline-block;
+            background: linear-gradient(90deg, #C5A059, #D4AF37);
+            color: white;
+            padding: 1.2rem 4rem;
+            font-size: 1.3rem;
+            border-radius: 50px;
+            text-decoration: none;
+            box-shadow: 0 10px 25px rgba(197, 160, 89, 0.3);
+            transition: transform 0.2s, box-shadow 0.2s;
+            font-weight: bold;
+        }
+
+        .buy-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 35px rgba(197, 160, 89, 0.5);
+        }
+
+        /* --- Footer --- */
+        footer {
+            text-align: center;
+            padding: 3rem 1rem;
+            background-color: #fcfcfc;
+            color: #a1887f;
+            font-size: 0.9rem;
+            border-top: 1px solid #eee;
+        }
+
+        .email-copy {
+            color: var(--deep-earth);
+            cursor: pointer;
+            font-weight: bold;
+            border-bottom: 1px dashed var(--deep-earth);
+        }
+
+        /* Toast */
+        #toast {
+            visibility: hidden;
+            min-width: 250px;
+            background-color: #3E2723;
+            color: #fff;
+            text-align: center;
+            border-radius: 4px;
+            padding: 16px;
+            position: fixed;
+            z-index: 100;
+            left: 50%;
+            bottom: 30px;
+            transform: translateX(-50%);
+            font-size: 1rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        #toast.show {
+            visibility: visible;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="domain-title">
+            <span class="num-part">8013</span><span class="tld-part">.baby</span>
+        </div>
+        <div class="tagline">伴你一生 · 岁月无惊</div>
+        <div class="sub-tagline">A Lifetime of Companionship</div>
+    </header>
+
+    <!-- Canvas: Flowing "伴你一生" -->
+    <div id="visual-wrapper">
+        <canvas id="companionCanvas"></canvas>
+        <div class="visual-overlay">WALKING TOGETHER FOREVER</div>
+    </div>
+
+    <section class="features-section">
+        <div class="section-header">
+            <h2>🕰️ 8大领域：一生的承诺 🕰️</h2>
+        </div>
+        
+        <div class="grid">
+            <!-- 1. The Vow -->
+            <div class="card">
+                <span class="icon">💍</span>
+                <h3>终身誓言 (The Vow)</h3>
+                <p>8013(伴你一生) 是婚礼上最动人的誓词。建立一个记录你们从相识到金婚的时光网站。</p>
+            </div>
+            <!-- 2. Parenting Journey -->
+            <div class="card">
+                <span class="icon">👣</span>
+                <h3>育儿长征 (Parenting)</h3>
+                <p>父母对孩子(.baby)最深情的告白：无论世界如何变迁，爸爸妈妈都会“伴你一生”。</p>
+            </div>
+            <!-- 3. Elderly Care -->
+            <div class="card">
+                <span class="icon">👵</span>
+                <h3>养老关怀 (Elderly Care)</h3>
+                <p>“你养我小，我养你老”。适合高端家庭护理或养老服务，传递不离不弃的陪伴理念。</p>
+            </div>
+            <!-- 4. Pet Companion -->
+            <div class="card">
+                <span class="icon">🐕</span>
+                <h3>宠物相伴 (Pet Love)</h3>
+                <p>宠物的一生很短，但它们用尽一生来陪伴我们。这是一个纪念爱宠的温暖空间。</p>
+            </div>
+            <!-- 5. Insurance & Trust -->
+            <div class="card">
+                <span class="icon">🛡️</span>
+                <h3>终身保障 (Insurance)</h3>
+                <p>适合保险、家族信托业务。寓意为客户的家庭提供“伴你一生”的安全与财富保障。</p>
+            </div>
+            <!-- 6. Digital Legacy -->
+            <div class="card">
+                <span class="icon">💾</span>
+                <h3>数字遗产 (Legacy)</h3>
+                <p>在云端存储家族的故事、照片和家训。让家族精神超越肉体生命，伴随子孙一生。</p>
+            </div>
+            <!-- 7. Anniversary Gift -->
+            <div class="card">
+                <span class="icon">🎁</span>
+                <h3>纪念日厚礼 (Anniversary)</h3>
+                <p>在这个快餐时代，送出一个代表“一生”的数字资产，是对伴侣最崇高的致敬。</p>
+            </div>
+            <!-- 8. Couple's Blog -->
+            <div class="card">
+                <span class="icon">📝</span>
+                <h3>共度时光 (Life Blog)</h3>
+                <p>记录两人一起走过的路、看过的风景。8013.baby 是你们共同人生的见证者。</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-container">
+        <div class="price-display">$100 <span>USD</span></div>
+        <p style="margin-bottom: 2rem; color: #795548;">Spaceship 官方安全交易 · 珍藏一生</p>
+        
+        <!-- Spaceship Link - Opens in New Tab -->
+        <a href="https://www.spaceship.com/s/buy/8013.baby/9s1mPlnIlt1AXSVk" target="_blank" class="buy-btn">
+            立即购买 · 锁定承诺
+        </a>
+    </section>
+
+    <footer>
+        <p>联系卖家: <span class="email-copy" onclick="copyEmail()">joshua369x@gmail.com</span></p>
+        <p>© 2026 8013.baby | 伴你一生 With You Forever</p>
+    </footer>
+
+    <div id="toast">邮箱已复制 (Email Copied)</div>
+
+    <script>
+        // --- Email Copy Function ---
+        function copyEmail() {
+            const email = "joshua369x@gmail.com";
+            navigator.clipboard.writeText(email).then(() => {
+                const toast = document.getElementById("toast");
+                toast.className = "show";
+                setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 2500);
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+            });
+        }
+
+        // --- Canvas Animation: Flowing "伴你一生" ---
+        const canvas = document.getElementById('companionCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        let width, height;
+        let particles = [];
+        
+        // Symbols: 8013 + "With you for life"
+        const symbols = ['8', '0', '1', '3', '伴', '你', '一', '生', '∞'];
+
+        function resize() {
+            width = canvas.width = canvas.parentElement.offsetWidth;
+            height = canvas.height = canvas.parentElement.offsetHeight;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        class Particle {
+            constructor() {
+                this.reset(true);
+            }
+
+            reset(initial = false) {
+                this.x = Math.random() * width;
+                // Flowing sideways (like a river of time)
+                this.y = Math.random() * height;
+                
+                this.speed = 0.5 + Math.random() * 1.0; 
+                this.size = 14 + Math.random() * 18;
+                this.text = symbols[Math.floor(Math.random() * symbols.length)];
+                
+                // Colors: Gold, Earth, Sand
+                const rand = Math.random();
+                if (rand < 0.5) {
+                    this.color = `rgba(197, 160, 89, ${0.3 + Math.random()*0.5})`; // Gold
+                } else if (rand < 0.8) {
+                    this.color = `rgba(93, 64, 55, ${0.2 + Math.random()*0.3})`; // Earth
+                } else {
+                    this.color = `rgba(245, 222, 179, ${0.4 + Math.random()*0.4})`; // Sand
+                }
+            }
+
+            update() {
+                this.x += this.speed; // Moving Right
+                this.y += Math.sin(this.x / 50) * 0.5; // Gentle wave
+
+                if (this.x > width + 20) {
+                    this.x = -20;
+                    this.y = Math.random() * height;
+                }
+            }
+
+            draw() {
+                ctx.font = `${this.size}px "Microsoft YaHei", sans-serif`;
+                ctx.fillStyle = this.color;
+                ctx.fillText(this.text, this.x, this.y);
+            }
+        }
+
+        // Initialize Particles
+        for (let i = 0; i < 80; i++) {
+            particles.push(new Particle());
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+
+    </script>
+</body>
+</html>
